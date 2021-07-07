@@ -5,12 +5,11 @@ jobs:
     steps:
       - set-unstable: |
           if [ "$COVERAGE" -lt 95 ]
-            then curl -X PUT -H "Authorization: Bearer $SD_TOKEN" -H "Content-Type: application/json" -d '{"status": "UNSTABLE", "statusMessage": "this build is unstable"}' "${API_URL}/${SD_BUILD_ID}"
+            then curl -X PUT -H "Authorization: Bearer $SD_TOKEN" -H "Content-Type: application/json" -d '{"status": "UNSTABLE", "statusMessage": "this build is unstable"}' "${SD_BUILD_URL}"
           fi
       - echo: echo "This build status is set as Unstable and will not trigger the next build"
     environment:
         COVERAGE: 90
-        API_URL: https://api.screwdriver.cd/v4/builds
     requires:
       - ~commit
   publish:
